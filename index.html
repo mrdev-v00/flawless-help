@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>𝐅𝐥𝐚𝐰𝐥𝐞𝐬𝐬 - Help</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body.light {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+            color: #1a1a1a;
+        }
+
+        body.dark {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #ffffff;
+        }
+
+        .navbar {
+            padding: 18px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        body.light .navbar {
+            background: rgba(255, 255, 255, 0.85);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        body.dark .navbar {
+            background: rgba(10, 10, 10, 0.85);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .profile-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 3px solid;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        body.light .profile-avatar {
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark .profile-avatar {
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .profile-name {
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .status-indicator {
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .status-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px currentColor;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .status-dnd { 
+            background-color: #f23f43;
+            color: #f23f43;
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .theme-toggle {
+            padding: 10px 20px;
+            border: 2px solid;
+            background: transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body.light .theme-toggle {
+            border-color: #1a1a1a;
+            color: #1a1a1a;
+        }
+
+        body.dark .theme-toggle {
+            border-color: #ffffff;
+            color: #ffffff;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        body.light .theme-toggle:hover {
+            background: #1a1a1a;
+            color: #ffffff;
+        }
+
+        body.dark .theme-toggle:hover {
+            background: #ffffff;
+            color: #1a1a1a;
+        }
+
+        .add-btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            font-size: 14px;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        body.light .add-btn {
+            background: linear-gradient(135deg, #000000 0%, #2c2c2c 100%);
+            color: #ffffff;
+        }
+
+        body.dark .add-btn {
+            background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+            color: #000000;
+        }
+
+        .add-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .main-container {
+            display: flex;
+            min-height: calc(100vh - 150px);
+        }
+
+        .sidebar {
+            width: 300px;
+            border-right: 1px solid;
+            overflow-y: auto;
+            padding: 30px 0;
+        }
+
+        body.light .sidebar {
+            background: rgba(255, 255, 255, 0.6);
+            border-right-color: rgba(0, 0, 0, 0.08);
+        }
+
+        body.dark .sidebar {
+            background: rgba(15, 15, 15, 0.6);
+            border-right-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(128, 128, 128, 0.4);
+            border-radius: 3px;
+        }
+
+        .category-item {
+            padding: 14px 35px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 15px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .category-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 0;
+            transition: height 0.3s;
+        }
+
+        body.light .category-item::before {
+            background: #000000;
+        }
+
+        body.dark .category-item::before {
+            background: #ffffff;
+        }
+
+        body.light .category-item:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        body.dark .category-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .category-item.active {
+            font-weight: 700;
+        }
+
+        .category-item.active::before {
+            height: 70%;
+        }
+
+        body.light .category-item.active {
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        body.dark .category-item.active {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px 50px;
+        }
+
+        .content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .content::-webkit-scrollbar-thumb {
+            background: rgba(128, 128, 128, 0.4);
+            border-radius: 4px;
+        }
+
+        .search-container {
+            margin-bottom: 35px;
+        }
+
+        .search-input {
+            width: 100%;
+            max-width: 600px;
+            padding: 16px 20px;
+            border: 2px solid;
+            border-radius: 12px;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+
+        body.light .search-input {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(0, 0, 0, 0.15);
+            color: #1a1a1a;
+        }
+
+        body.dark .search-input {
+            background: rgba(26, 26, 26, 0.9);
+            border-color: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+        }
+
+        .search-input:focus {
+            border-color: #5865f2;
+            box-shadow: 0 0 0 4px rgba(88, 101, 242, 0.1);
+        }
+
+        .search-input::placeholder {
+            opacity: 0.5;
+        }
+
+        .command-item {
+            padding: 20px 0;
+            border-bottom: 1px solid;
+            transition: all 0.3s;
+        }
+
+        body.light .command-item {
+            border-bottom-color: rgba(0, 0, 0, 0.08);
+        }
+
+        body.dark .command-item {
+            border-bottom-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .command-item:hover {
+            padding-left: 15px;
+        }
+
+        .command-name {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 8px;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            letter-spacing: -0.3px;
+        }
+
+        body.light .command-name {
+            color: #5865f2;
+        }
+
+        body.dark .command-name {
+            color: #7289da;
+        }
+
+        .command-desc {
+            font-size: 14px;
+            opacity: 0.85;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            padding: 15px 20px;
+            z-index: 99;
+        }
+
+        body.light .footer {
+            background: transparent;
+        }
+
+        body.dark .footer {
+            background: transparent;
+        }
+        
+        .footer .add-btn {
+            padding: 10px 20px;
+            font-size: 13px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px;
+            opacity: 0.5;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .category-title {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 250px;
+            }
+
+            .content {
+                padding: 30px 25px;
+            }
+
+            .navbar {
+                padding: 15px 20px;
+            }
+        }
+    </style>
+</head>
+<body class="dark">
+    <nav class="navbar">
+        <div class="profile-section" id="botProfile">
+            <img class="profile-avatar" id="botAvatar" src="flawless.jpg" alt="Flawless Bot">
+            <div class="profile-info">
+                <div class="profile-name">𝐅𝐥𝐚𝐰𝐥𝐞𝐬𝐬</div>
+                <div class="status-indicator">
+                    <span class="status-dot status-dnd" id="botStatus"></span>
+                    <span id="botStatusText">Do Not Disturb</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-center">
+            <button class="theme-toggle" onclick="toggleTheme()">🌓 Toggle Theme</button>
+            <a href="https://discord.com/oauth2/authorize?client_id=1427334099198279821" target="_blank" class="add-btn">Add to Discord</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="category-item active" data-category="all">All Commands</div>
+            <div class="category-item" data-category="admin">Admin</div>
+            <div class="category-item" data-category="general">General</div>
+            <div class="category-item" data-category="moderation">Moderation</div>
+            <div class="category-item" data-category="antinuke">Anti-Nuke</div>
+            <div class="category-item" data-category="antiraid">Anti-Raid</div>
+            <div class="category-item" data-category="channels">Channels</div>
+            <div class="category-item" data-category="roles">Roles</div>
+            <div class="category-item" data-category="events">Welcome & Events</div>
+            <div class="category-item" data-category="levels">Levels & Economy</div>
+            <div class="category-item" data-category="games">Games</div>
+            <div class="category-item" data-category="fun">Fun & Roleplay</div>
+            <div class="category-item" data-category="music">Music</div>
+            <div class="category-item" data-category="tickets">Tickets</div>
+            <div class="category-item" data-category="tracking">Invites & Tracking</div>
+            <div class="category-item" data-category="staff">Staff Management</div>
+            <div class="category-item" data-category="birthdays">Birthdays</div>
+            <div class="category-item" data-category="ai">AI</div>
+            <div class="category-item" data-category="voice">Voice</div>
+            <div class="category-item" data-category="logging">Logging</div>
+        </aside>
+
+        <main class="content">
+            <div class="search-container">
+                <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search commands...">
+            </div>
+            <h2 class="category-title" id="categoryTitle">All Commands</h2>
+            <div id="commandsList"></div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <a href="https://discord.com/oauth2/authorize?client_id=1427334099198279821" target="_blank" class="add-btn">Add to Discord</a>
+    </footer>
+<script>
+        // Backend API URL - change this to your deployed backend URL
+        const API_URL = 'http://localhost:3000';
+
+        const commands = {
+            admin: [
+                { name: 'addadmin / botadmin', desc: 'Add a bot admin (Bot Owner only)' },
+                { name: 'removeadmin / deladmin', desc: 'Remove a bot admin (Bot Owner only)' },
+                { name: 'addnoprefix / np / noprefix', desc: 'Add user to no prefix list (Bot Owner only)' },
+                { name: 'removenoprefix / rnp / delnoprefix', desc: 'Remove user from no prefix list (Bot Owner only)' }
+            ],
+            general: [
+                { name: 'afk [reason]', desc: 'Set your AFK status with optional reason' },
+                { name: 'ping', desc: 'Check bot latency and response time' },
+                { name: 'prefix [NEW_PREFIX]', desc: 'Change server prefix' },
+                { name: 'config / settings', desc: 'View current guild settings' },
+                { name: 'botinfo / info / about', desc: 'View bot information' },
+                { name: 'membercount / mc', desc: 'View member count' },
+                { name: 'boostcount / bc', desc: 'View boost count' },
+                { name: 'serverinfo / si', desc: 'View server information' },
+                { name: 'userinfo / ui', desc: 'View user information' },
+                { name: 'avatar / av @target', desc: 'View user avatar' },
+                { name: 'vcrole @role', desc: 'Set voice channel role' },
+                { name: 'remind [time] [message] [-u or -s]', desc: 'Set a reminder (flags: -u for user, -s for server)' },
+                { name: 'say [msg]', desc: 'Make the bot say something' },
+                { name: 'reply [msg]', desc: 'Reply with the bot' },
+                { name: 'aliase add [keyword] @role', desc: 'Add role alias' },
+                { name: 'aliase remove keyword', desc: 'Remove role alias' },
+                { name: 'aliase list', desc: 'List all role aliases' },
+                { name: 'autoresponder Keyword "Msg"', desc: 'Add auto-responder' },
+                { name: 'autoresponder remove Keyword', desc: 'Remove auto-responder' },
+                { name: 'autoresponder', desc: 'View auto-responder list' },
+                { name: 'autoreactor Keyword :emoji:', desc: 'Add auto-reactor' },
+                { name: 'autoreactor', desc: 'View auto-reactor IDs' },
+                { name: 'autoreactor remove #ID', desc: 'Remove auto-reactor by ID' },
+                { name: 'autorole [HUMAN/BOT] @role', desc: 'Set auto-role for humans or bots' }
+            ],
+            moderation: [
+                { name: 'warn', desc: 'Warn a member' },
+                { name: 'unwarn', desc: 'Remove warning from member' },
+                { name: 'mute', desc: 'Mute a member' },
+                { name: 'unmute', desc: 'Unmute a member' },
+                { name: 'kick', desc: 'Kick a member from server' },
+                { name: 'ban', desc: 'Ban a member from server' },
+                { name: 'purge [amount] [user]', desc: 'Delete messages (optionally from specific user)' },
+                { name: 'pb / clear', desc: 'Clear messages' },
+                { name: 'slow [seconds]', desc: 'Set channel slowmode' },
+                { name: 'lock', desc: 'Lock channel' },
+                { name: 'unlock', desc: 'Unlock channel' },
+                { name: 'hide', desc: 'Hide channel' },
+                { name: 'unhide', desc: 'Unhide channel' },
+                { name: 'nick @user [new_nick]', desc: 'Change user nickname' },
+                { name: 'addrole @user @role', desc: 'Add role to user' },
+                { name: 'removerole @user @role', desc: 'Remove role from user' },
+                { name: 'blockword [add/remove]', desc: 'Add or remove blocked word' },
+                { name: 'blockword [list]', desc: 'List all blocked words' },
+                { name: 'blockword whitelist addrole @role', desc: 'Whitelist role from word filter' },
+                { name: 'blockword whitelist adduser @user', desc: 'Whitelist user from word filter' },
+                { name: 'blockword whitelist addchannel #channel', desc: 'Whitelist channel from word filter' }
+            ],
+            antinuke: [
+                { name: 'antinuke [enable/disable]', desc: 'Enable or disable anti-nuke protection' },
+                { name: 'antinuke logging #channel', desc: 'Set logging channel for anti-nuke events' },
+                { name: 'antinuke alert #channel', desc: 'Set alert channel for anti-nuke' },
+                { name: 'antinuke punishment set [Quarantine/Ban/Kick]', desc: 'Set punishment type' },
+                { name: 'antinuke status', desc: 'View anti-nuke status' },
+                { name: 'antinuke whitelist add @user', desc: 'Add user to whitelist' },
+                { name: 'antinuke whitelist remove @user', desc: 'Remove user from whitelist' },
+                { name: 'antinuke whitelist show', desc: 'Show whitelist' },
+                { name: 'antinuke whitelist reset', desc: 'Reset whitelist' },
+                { name: 'quarantine / Q @user', desc: 'Quarantine a user' },
+                { name: 'unquarantine / Uq @user', desc: 'Remove user from quarantine' },
+                { name: 'qrole @quarantined', desc: 'Set quarantine role' }
+            ],
+            antiraid: [
+                { name: 'antiraid [enable | disable | status]', desc: 'Control anti-raid system' },
+                { name: 'antiraid stats', desc: 'View anti-raid statistics' },
+                { name: 'antiraid help', desc: 'Get help with anti-raid' },
+                { name: 'antiraid lockdown', desc: 'Enable server lockdown' },
+                { name: 'antiraid unlock', desc: 'Disable server lockdown' },
+                { name: 'antiraid whitelist messagespam @role', desc: 'Whitelist role from message spam detection' },
+                { name: 'antiraid whitelist mentions @role', desc: 'Whitelist role from mention spam' },
+                { name: 'antiraid whitelist everyonespam @role', desc: 'Whitelist role from everyone spam' },
+                { name: 'antiraid whitelist gif @role', desc: 'Whitelist role from GIF spam' },
+                { name: 'antiraid whitelist invites @role', desc: 'Whitelist role from invite spam' },
+                { name: 'antiraid whitelist webhook @role', desc: 'Whitelist role from webhook spam' },
+                { name: 'antiraid whitelist caps @role', desc: 'Whitelist role from caps spam' },
+                { name: 'antiraid whitelist zalgo @role', desc: 'Whitelist role from zalgo text' },
+                { name: 'antiraid whitelist links @role', desc: 'Whitelist role from link spam' },
+                { name: 'antiraid whitelist emoji @role', desc: 'Whitelist role from emoji spam' },
+                { name: 'antiraid whitelist admin @role', desc: 'Give role admin immunity' },
+                { name: 'antiraid whitelist lockdown @role', desc: 'Whitelist role from lockdown' },
+                { name: 'antiraid whitelist show', desc: 'Show all whitelists' },
+                { name: 'antiraid user @user', desc: 'Give user full immunity' },
+                { name: 'antiraid channel #channel', desc: 'Set anti-raid immune channel' },
+                { name: 'antiraid strikes @user', desc: 'View user strikes' },
+                { name: 'antiraid module [enable/disable a module]', desc: 'Toggle anti-raid module' },
+                { name: 'antiraid logging #logs', desc: 'Set logging channel' },
+                { name: 'antiraid alert #alert', desc: 'Set alert channel' },
+                { name: 'antiraid raidmode [on/off]', desc: 'Toggle raid mode' },
+                { name: 'antiraid muterole @mutedrole', desc: 'Set mute role' },
+                { name: 'antiraid threshold [element] [limit]', desc: 'Set detection threshold' },
+                { name: 'antiraid punishment [violation] [act]', desc: 'Set punishment for violation' },
+                { name: 'antiraid reset confirm', desc: 'Reset all anti-raid settings' }
+            ],
+            channels: [
+                { name: 'channel create [text/voice] [name]', desc: 'Create new channel' },
+                { name: 'channel delete [channel]', desc: 'Delete channel' },
+                { name: 'channel rename [channel] [new_name]', desc: 'Rename channel' },
+                { name: 'channel topic #channel TOPIC', desc: 'Set channel topic' },
+                { name: 'channel slowmode #channel slowmode', desc: 'Set channel slowmode' },
+                { name: 'channel nsfw #channel', desc: 'Toggle NSFW status' },
+                { name: 'channel lock #channel', desc: 'Lock channel' },
+                { name: 'channel unlock #channel', desc: 'Unlock channel' },
+                { name: 'channel hide #channel', desc: 'Hide channel' },
+                { name: 'channel unhide #channel', desc: 'Unhide channel' },
+                { name: 'channel category #channel #parent_category', desc: 'Move channel to category' },
+                { name: 'channel position #channel [Position]', desc: 'Set channel position' },
+                { name: 'channel clone [channel]', desc: 'Clone channel' },
+                { name: 'channel info #channel', desc: 'View channel information' },
+                { name: 'ignore channel #channel', desc: 'Ignore channel from command usage' },
+                { name: 'ignore bypass [add/remove] @user', desc: 'Manage ignore bypass' },
+                { name: 'ignore bypass list', desc: 'List bypass users' },
+                { name: 'ignore list', desc: 'List ignored channels' },
+                { name: 'ignore clear', desc: 'Clear all ignored channels' },
+                { name: 'blockreply / br #channel', desc: 'Block bot replies in channel' },
+                { name: 'unblockreply #channel', desc: 'Unblock bot replies in channel' },
+                { name: 'blockedchannels', desc: 'List blocked channels' },
+                { name: 'temp channel #channel', desc: 'Set temporary voice channel' },
+                { name: 'temp #category #category', desc: 'Set temp channel category' },
+                { name: 'temp panel', desc: 'Show temp channel panel' },
+                { name: 'temp config', desc: 'Configure temp channels' },
+                { name: 'stickyadd / sa [channel] [message]', desc: 'Add sticky message' },
+                { name: 'stickyremove / sr [channel]', desc: 'Remove sticky message' },
+                { name: 'stickylist / sl', desc: 'List sticky messages' }
+            ],
+            roles: [
+                { name: 'role [add/remove] @user @role', desc: 'Add or remove role from user' },
+                { name: 'role create [name]', desc: 'Create new role' },
+                { name: 'role delete [role]', desc: 'Delete role' },
+                { name: 'role position [position/below_role] @role', desc: 'Set role position' },
+                { name: 'role color @role #HEX', desc: 'Set role color' },
+                { name: 'role permission @role [permission]', desc: 'Set role permission' },
+                { name: 'reactionrole #channel', desc: 'Setup reaction roles' },
+                { name: 'ghave @role', desc: 'Give connected roles if user has role' },
+                { name: 'thave @role', desc: 'Take connected roles if user has role' },
+                { name: 'have list', desc: 'List role connections' },
+                { name: 'have remove @role', desc: 'Remove role connection' },
+                { name: 'have clear @role [give/take]', desc: 'Clear role connections' },
+                { name: 'have', desc: 'View role have system' }
+            ],
+            events: [
+                { name: 'rule send #channel', desc: 'Send rules to channel' },
+                { name: 'rule color #HEX', desc: 'Set rule embed color' },
+                { name: 'rule text [text]', desc: 'Set rule text' },
+                { name: 'rule role @role', desc: 'Set rule acceptance role' },
+                { name: 'rule emoji :emoji:', desc: 'Set rule reaction emoji' },
+                { name: 'rule header Header_text', desc: 'Set rule header' },
+                { name: 'rule footer Footer_text', desc: 'Set rule footer' },
+                { name: 'role title Title_text', desc: 'Set role title' },
+                { name: 'welcome channel #channel', desc: 'Set welcome channel' },
+                { name: 'welcome text [text]', desc: 'Set welcome message' },
+                { name: 'welcome embed title [title]', desc: 'Set welcome embed title' },
+                { name: 'welcome description [description]', desc: 'Set welcome embed description' },
+                { name: 'welcome embed thumbnail [ua/sa]', desc: 'Set welcome thumbnail (user/server avatar)' },
+                { name: 'welcome embed footer [ua/sa]', desc: 'Set welcome footer' },
+                { name: 'welcome test', desc: 'Test welcome message' },
+                { name: 'welcome reset', desc: 'Reset welcome settings' },
+                { name: 'boost channel #channel', desc: 'Set boost announcement channel' },
+                { name: 'boost text [text]', desc: 'Set boost message' },
+                { name: 'boost embed title [title]', desc: 'Set boost embed title' },
+                { name: 'boost description [description]', desc: 'Set boost embed description' },
+                { name: 'boost embed thumbnail [ua/sa]', desc: 'Set boost thumbnail' },
+                { name: 'boost embed footer [ua/sa]', desc: 'Set boost footer' },
+                { name: 'boost test', desc: 'Test boost message' },
+                { name: 'boost reset', desc: 'Reset boost settings' },
+                { name: 'suggestions channel #channel', desc: 'Set suggestions channel' },
+                { name: 'suggestions team @role', desc: 'Set suggestions team role' },
+                { name: 'suggestions reaction :emoji:', desc: 'Set suggestion reaction emoji' },
+                { name: 'suggestions reward [text]', desc: 'Set suggestion reward text' }
+            ],
+            levels: [
+                { name: 'level / lvl', desc: 'View your level' },
+                { name: 'rank', desc: 'View your rank card' },
+                { name: 'profile', desc: 'View your profile' },
+                { name: 'balance / bal / wallet', desc: 'View your balance' },
+                { name: 'leaderboard / top / lb', desc: 'View server leaderboard' },
+                { name: 'leaderbd / lbs for levels', desc: 'View level leaderboard' },
+                { name: 'daily', desc: 'Claim daily reward' },
+                { name: 'weekly', desc: 'Claim weekly reward' },
+                { name: 'work', desc: 'Work to earn money' },
+                { name: 'deposit / dep', desc: 'Deposit money to bank' },
+                { name: 'withdraw / with', desc: 'Withdraw money from bank' },
+                { name: 'inventory / inv / bag', desc: 'View your inventory' },
+                { name: 'backgrounds / bg / shop', desc: 'Browse profile backgrounds' },
+                { name: 'buy [bg-type] [id]', desc: 'Buy a background' },
+                { name: 'equip [bg-type] [id]', desc: 'Equip a background' },
+                { name: 'customrole / cr name', desc: 'Create custom role' },
+                { name: 'edit role [color/name] [value]', desc: 'Edit custom role' },
+                { name: 'deleterole', desc: 'Delete custom role' },
+                { name: 'level set @user [value]', desc: 'Set user level (admin)' },
+                { name: 'level role-reward @role [on_level]', desc: 'Set role reward for level' },
+                { name: 'level role-claim @role', desc: 'Claim level role' },
+                { name: 'level role-position @role', desc: 'Set level role position' },
+                { name: 'setdaily <amount>', desc: 'Set daily reward amount (admin)' },
+                { name: 'setweekly <amount>', desc: 'Set weekly reward amount (admin)' },
+                { name: 'addxp @user [amount]', desc: 'Add XP to user (admin)' },
+                { name: 'removexp @user [amount]', desc: 'Remove XP from user (admin)' },
+                { name: 'addmoney @user [amount]', desc: 'Add money to user (admin)' },
+                { name: 'removemoney @user [amount]', desc: 'Remove money from user (admin)' }
+            ],
+            games: [
+                { name: 'truthordare / truth / dare / tod', desc: 'Play truth or dare' },
+                { name: 'randomtruth / rt', desc: 'Get random truth' },
+                { name: 'randomdare / rd', desc: 'Get random dare' },
+                { name: 'todstats', desc: 'View truth or dare stats' },
+                { name: 'guess start', desc: 'Start guess game' },
+                { name: 'guess end', desc: 'End guess game' },
+                { name: 'guess count', desc: 'View guess count' },
+                { name: 'guess channel', desc: 'Set guess channel' },
+                { name: 'guess correct :emoji:', desc: 'Set correct guess emoji' },
+                { name: 'guess wrong :emoji:', desc: 'Set wrong guess emoji' },
+                { name: 'guess config', desc: 'Configure guess game' },
+                { name: 'guess reveal', desc: 'Reveal answer' },
+                { name: 'guess auto <on/off>', desc: 'Toggle auto guess' },
+                { name: 'count #channel', desc: 'Start counting game' },
+                { name: 'count stop', desc: 'Stop counting game' },
+                { name: 'count target [number]', desc: 'Set count target' },
+                { name: 'count correct :emoji:', desc: 'Set correct count emoji' },
+                { name: 'count wrong :emoji:', desc: 'Set wrong count emoji' },
+                { name: 'count lb', desc: 'Count leaderboard' },
+                { name: 'gstart [duration] [winners] [prize]', desc: 'Start giveaway' },
+                { name: 'gend [msg-link/id]', desc: 'End giveaway' },
+                { name: 'groll [msg-link/id]', desc: 'Reroll giveaway' },
+                { name: 'glist', desc: 'List active giveaways' },
+                { name: 'gvouch #channel', desc: 'Set giveaway vouch channel' },
+                { name: 'keyvouch', desc: 'Vouch for giveaway' }
+            ],
+            fun: [
+                { name: 'gay @user', desc: 'Check how gay someone is' },
+                { name: 'lesbian @user', desc: 'Check how lesbian someone is' },
+                { name: 'straight @user', desc: 'Check how straight someone is' },
+                { name: 'gender @user', desc: 'Check gender' },
+                { name: 'genderM @user', desc: 'Set gender as male' },
+                { name: 'genderFM @user', desc: 'Set gender as female' },
+                { name: 'addstraight @user', desc: 'Add to straight list' },
+                { name: 'Nstraight @user', desc: 'Remove from straight list' },
+                { name: 'hug @user', desc: 'Hug someone' },
+                { name: 'kill @user', desc: 'Kill someone (roleplay)' },
+                { name: 'kiss @user', desc: 'Kiss someone' },
+                { name: 'slap @user', desc: 'Slap someone' },
+                { name: 'punch @user', desc: 'Punch someone' },
+                { name: 'tickle @user', desc: 'Tickle someone' },
+                { name: 'cuddle @user', desc: 'Cuddle someone' },
+                { name: 'feed @user', desc: 'Feed someone' },
+                { name: 'pat @user', desc: 'Pat someone' },
+                { name: 'push @user', desc: 'Push someone' },
+                { name: 'pull @user', desc: 'Pull someone' },
+                { name: 'throw @user', desc: 'Throw someone' },
+                { name: 'hang @user', desc: 'Hang someone (roleplay)' },
+                { name: 'cookie @user', desc: 'Give cookie to someone' },
+                { name: 'clover @user', desc: 'Give clover to someone' },
+                { name: 'pray @user', desc: 'Pray for someone' },
+                { name: 'curse @user', desc: 'Curse someone' },
+                { name: 'marry @user', desc: 'Marry someone' },
+                { name: 'divorce @user', desc: 'Divorce someone' },
+                { name: 'forcemarry @user', desc: 'Force marry someone' },
+                { name: 'forceadopt @user', desc: 'Force adopt someone' },
+                { name: 'disown @user', desc: 'Disown someone' },
+                { name: 'children @user', desc: 'View someone\'s children' },
+                { name: 'family @user', desc: 'View someone\'s family' }
+            ],
+            music: [
+                { name: 'play / p [song]', desc: 'Play a song' },
+                { name: 'skip / s', desc: 'Skip current song' },
+                { name: 'stop', desc: 'Stop music' },
+                { name: 'connect', desc: 'Connect to voice channel' },
+                { name: 'disconnect / dc', desc: 'Disconnect from voice channel' },
+                { name: 'queue [load/save/delete] [name]', desc: 'Manage queue' },
+                { name: 'queue list', desc: 'List saved queues' },
+                { name: 'current / nowplaying', desc: 'View current song' },
+                { name: 'loop [track/queue/off]', desc: 'Toggle loop mode' },
+                { name: 'pause', desc: 'Pause playback' },
+                { name: 'resume / unpause', desc: 'Resume playback' }
+            ],
+            tickets: [
+                { name: 'ticket create', desc: 'Create ticket panel' },
+                { name: 'ticket send [panel_name] [channel]', desc: 'Send ticket panel' },
+                { name: 'ticket sendall #channel', desc: 'Send all ticket panels' },
+                { name: 'ticket panels', desc: 'List ticket panels' },
+                { name: 'ticker delete [panel]', desc: 'Delete ticket panel' },
+                { name: 'ticket support @role', desc: 'Add support role' },
+                { name: 'ticket removesupport @role', desc: 'Remove support role' },
+                { name: 'ticket supportteam', desc: 'View support team' },
+                { name: 'ticket info', desc: 'View ticket information' },
+                { name: 'perks_on', desc: 'Enable ticket perks' },
+                { name: 'perks_off', desc: 'Disable ticket perks' },
+                { name: 'perks_promoters @role', desc: 'Set promoter role' },
+                { name: 'cpromoters #channel', desc: 'Set promoters channel' },
+                { name: 'perks_invite [invite]', desc: 'Set perks invite' }
+            ],
+            tracking: [
+                { name: 'stats', desc: 'View your stats' },
+                { name: 'vc', desc: 'View voice channel stats' },
+                { name: 'invite channel #channel', desc: 'Set invite tracking channel' },
+                { name: 'invite ping #ghosted', desc: 'Set invite ping channel' },
+                { name: 'invite add/remove @user [value]', desc: 'Manage user invites' },
+                { name: 'invite reset', desc: 'Reset invite tracking' },
+                { name: 'invite or i', desc: 'View invite stats' },
+                { name: 'message @user', desc: 'View user message stats' },
+                { name: 'msg add @user [value]', desc: 'Add messages to user' },
+                { name: 'msg remove @user [value]', desc: 'Remove messages from user' },
+                { name: 'msg reset', desc: 'Reset message tracking' },
+                { name: 'msg ignore add #channel', desc: 'Ignore channel from tracking' },
+                { name: 'msg ignore remove #channel', desc: 'Remove channel from ignore' },
+                { name: 'msg ignore list', desc: 'List ignored channels' },
+                { name: 'lb dailymessage', desc: 'Daily message leaderboard' },
+                { name: 'lb dailyvoice', desc: 'Daily voice leaderboard' },
+                { name: 'lb messages <opt. @role>', desc: 'Message leaderboard' },
+                { name: 'lb voice <opt. @role>', desc: 'Voice leaderboard' },
+                { name: 'lb invites', desc: 'Invite leaderboard' }
+            ],
+            staff: [
+                { name: 'staff role @role', desc: 'Set staff role' },
+                { name: 'staff track', desc: 'View staff tracking' },
+                { name: 'staff online', desc: 'View online staff' },
+                { name: 'staff offline', desc: 'View offline staff' },
+                { name: 'staff status [online, idle, dnd, offline]', desc: 'View staff by status' },
+                { name: 'staff info', desc: 'View staff information' }
+            ],
+            birthdays: [
+                { name: 'birthday timezone <timezone>', desc: 'Set your timezone' },
+                { name: 'birthday timezone view', desc: 'View your timezone' },
+                { name: 'birthday role @role', desc: 'Set birthday role' },
+                { name: 'birthday channel #channel', desc: 'Set birthday channel' },
+                { name: 'birthday board #channel', desc: 'Set birthday board channel' },
+                { name: 'birthday show @user', desc: 'View user birthday' },
+                { name: 'birthday embed [on/off]', desc: 'Toggle birthday embeds' },
+                { name: 'birthday embed title [title]', desc: 'Set birthday embed title' },
+                { name: 'birthday embed description [description]', desc: 'Set birthday embed description' },
+                { name: 'birthday embed footer [footer]', desc: 'Set birthday embed footer' },
+                { name: 'birthday show all', desc: 'View all birthdays' },
+                { name: 'birthday set [DD-MM-YYYY]', desc: 'Set your birthday' },
+                { name: 'birthday remove', desc: 'Remove your birthday' },
+                { name: 'birthday', desc: 'View birthday settings' }
+            ],
+            ai: [
+                { name: 'ask [question]', desc: 'Trigger AI response' },
+                { name: 'rp [prompt]', desc: 'Roleplay with unrestricted AI' },
+                { name: 'translate [prompt]', desc: 'AutoTranslate' },
+                { name: 'personality [set_personality for AI]', desc: 'Set AI personality' },
+                { name: 'rpersonality [Set Roleplay personality]', desc: 'Set RolePlay personality' },
+                { name: 'morederation [enable/disable]', desc: 'Toggle AI badword detection' },
+                { name: 'dedicated #channel', desc: 'Set dedicated AI channel (bot replies to every message)' },
+                { name: 'reset', desc: 'Reset AI memory' }
+            ],
+            voice: [
+                { name: 'Vdeafen @user', desc: 'Server deafen user' },
+                { name: 'Vdeafen all', desc: 'Server deafen all users' },
+                { name: 'Vkick @user', desc: 'Kick user from voice' },
+                { name: 'Vkick all', desc: 'Kick all from voice' },
+                { name: 'Vmove @user', desc: 'Move user to another voice channel' },
+                { name: 'Vmove all', desc: 'Move all users to another channel' },
+                { name: 'Vmute @user', desc: 'Server mute user' },
+                { name: 'Vmute all', desc: 'Server mute all users' },
+                { name: 'Vpull @user', desc: 'Pull user to your voice channel' },
+                { name: 'Vundeafen @user', desc: 'Server undeafen user' },
+                { name: 'Vundeafen all', desc: 'Server undeafen all users' },
+                { name: 'Vunmute @user', desc: 'Server unmute user' },
+                { name: 'Vunmute all', desc: 'Server unmute all users' },
+                { name: 'Vperms @role', desc: 'Set voice permissions for role' }
+            ],
+            logging: [
+                { name: 'setlog on_guild_channel_create #channel', desc: 'Log channel creation' },
+                { name: 'setlog on_guild_channel_delete #channel', desc: 'Log channel deletion' },
+                { name: 'setlog on_guild_channel_update #channel', desc: 'Log channel updates' },
+                { name: 'setlog on_message_edit #channel', desc: 'Log message edits' },
+                { name: 'setlog on_message_delete #channel', desc: 'Log message deletions' },
+                { name: 'setlog on_bulk_message_delete #channel', desc: 'Log bulk message deletions' },
+                { name: 'setlog on_member_join #channel', desc: 'Log member joins' },
+                { name: 'setlog on_member_remove #channel', desc: 'Log member leaves' },
+                { name: 'setlog on_member_update #channel', desc: 'Log member updates' },
+                { name: 'setlog on_user_update #channel', desc: 'Log user updates' },
+                { name: 'setlog on_guild_role_create #channel', desc: 'Log role creation' },
+                { name: 'setlog on_guild_role_delete #channel', desc: 'Log role deletion' },
+                { name: 'setlog on_guild_role_update #channel', desc: 'Log role updates' },
+                { name: 'setlog on_voice_state_update #channel', desc: 'Log voice state changes' },
+                { name: 'setlog on_automod_action #channel', desc: 'Log automod actions' },
+                { name: 'setlog on_guild_emoji_update #channel', desc: 'Log emoji updates' },
+                { name: 'setlog on_guild_sticker_update #channel', desc: 'Log sticker updates' },
+                { name: 'setlog on_invite_create #channel', desc: 'Log invite creation' },
+                { name: 'setlog on_invite_delete #channel', desc: 'Log invite deletion' },
+                { name: 'setlog on_scheduled_event_create #channel', desc: 'Log event creation' },
+                { name: 'setlog on_scheduled_event_delete #channel', desc: 'Log event deletion' },
+                { name: 'setlog on_scheduled_event_update #channel', desc: 'Log event updates' },
+                { name: 'setlog on_audit_log_entry_create #channel', desc: 'Log audit log entries' },
+                { name: 'setlog on_guild_join #channel', desc: 'Log bot joining servers' },
+                { name: 'setlog on_guild_update #channel', desc: 'Log server updates' }
+            ]
+        };
+
+        let currentCategory = 'all';
+        let allCommands = [];
+
+        // Flatten all commands
+        Object.keys(commands).forEach(cat => {
+            commands[cat].forEach(cmd => {
+                allCommands.push({...cmd, category: cat});
+            });
+        });
+
+        function renderCommands(commandList) {
+            const container = document.getElementById('commandsList');
+            
+            if (commandList.length === 0) {
+                container.innerHTML = '<div class="no-results">No commands found</div>';
+                return;
+            }
+
+            container.innerHTML = commandList.map(cmd => `
+                <div class="command-item">
+                    <div class="command-name">${cmd.name}</div>
+                    <div class="command-desc">${cmd.desc}</div>
+                </div>
+            `).join('');
+        }
+
+        function filterCommands(category, searchTerm = '') {
+            let commandList = category === 'all' ? allCommands : commands[category];
+            
+            if (searchTerm) {
+                commandList = commandList.filter(cmd => 
+                    cmd.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    cmd.desc.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            }
+
+            renderCommands(commandList);
+        }
+
+        // Category selection
+        document.querySelectorAll('.category-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.category-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                
+                currentCategory = this.dataset.category;
+                const categoryTitle = this.textContent;
+                document.getElementById('categoryTitle').textContent = categoryTitle;
+                document.getElementById('searchInput').value = '';
+                
+                filterCommands(currentCategory);
+            });
+        });
+
+        // Search
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            filterCommands(currentCategory, e.target.value);
+        });
+
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light');
+            document.body.classList.toggle('dark');
+        }
+
+        // Connect to backend WebSocket
+        function connectToBackend() {
+            const ws = new WebSocket(API_URL.replace('http', 'ws'));
+
+            ws.onopen = () => {
+                console.log('Connected to backend');
+            };
+
+            ws.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                
+                if (data.type === 'bot_status') {
+                    updateStatus('bot', data.status, data.user);
+                } else if (data.type === 'user_status') {
+                    updateStatus('user', data.status, data.user);
+                }
+            };
+
+            ws.onerror = (error) => {
+                console.error('WebSocket error:', error);
+            };
+
+            ws.onclose = () => {
+                console.log('Disconnected from backend. Reconnecting...');
+                setTimeout(connectToBackend, 5000);
+            };
+        }
+
+        function updateStatus(type, status, user) {
+            const statusDot = document.getElementById(type === 'bot' ? 'botStatus' : 'userStatus');
+            const statusText = document.getElementById(type === 'bot' ? 'botStatusText' : 'userStatusText');
+            
+            statusDot.className = 'status-dot status-' + status;
+            statusText.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+
+            if (user) {
+                const avatar = document.getElementById(type === 'bot' ? 'botAvatar' : 'userAvatar');
+                avatar.src = user.avatar 
+                    ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`
+                    : 'https://cdn.discordapp.com/embed/avatars/0.png';
+
+                if (type === 'user') {
+                    document.getElementById('userName').textContent = user.username;
+                }
+            }
+        }
+
+        // Initialize
+        connectToBackend();
+        filterCommands('all');
+    </script>
+</body>
+</html>
