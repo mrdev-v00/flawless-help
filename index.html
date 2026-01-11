@@ -538,19 +538,88 @@
                 { name: 'blockword whitelist addchannel #channel', desc: 'Whitelist channel from word filter' }
             ],
             antinuke: [
-                { name: 'antinuke [enable/disable]', desc: 'Enable or disable anti-nuke protection' },
-                { name: 'antinuke logging #channel', desc: 'Set logging channel for anti-nuke events' },
-                { name: 'antinuke alert #channel', desc: 'Set alert channel for anti-nuke' },
-                { name: 'antinuke punishment set [Quarantine/Ban/Kick]', desc: 'Set punishment type' },
-                { name: 'antinuke status', desc: 'View anti-nuke status' },
-                { name: 'antinuke whitelist add @user', desc: 'Add user to whitelist' },
-                { name: 'antinuke whitelist remove @user', desc: 'Remove user from whitelist' },
-                { name: 'antinuke whitelist show', desc: 'Show whitelist' },
-                { name: 'antinuke whitelist reset', desc: 'Reset whitelist' },
-                { name: 'quarantine / Q @user', desc: 'Quarantine a user' },
-                { name: 'unquarantine / Uq @user', desc: 'Remove user from quarantine' },
-                { name: 'qrole @quarantined', desc: 'Set quarantine role' }
-            ],
+    // Core Commands
+    { name: 'antinuke', desc: 'Shows anti-nuke overview and status' },
+    { name: 'antinuke status', desc: 'Shows detailed anti-nuke configuration' },
+    { name: 'antinuke config', desc: 'Alias for status command' },
+    { name: 'antinuke info', desc: 'Alias for status command' },
+    { name: 'antinuke enable', desc: 'Enable anti-nuke protection system' },
+    { name: 'antinuke disable', desc: 'Disable anti-nuke protection system' },
+    
+    // Channel Setup
+    { name: 'antinuke logging #channel', desc: 'Set logging channel for anti-nuke events' },
+    { name: 'antinuke alert #channel', desc: 'Set alert channel for critical threats' },
+    
+    // Punishment Configuration
+    { name: 'antinuke punishment quarantine', desc: 'Set punishment to quarantine mode' },
+    { name: 'antinuke punishment kick', desc: 'Set punishment to kick mode' },
+    { name: 'antinuke punishment ban', desc: 'Set punishment to ban mode' },
+    
+    // Whitelist - General
+    { name: 'antinuke whitelist', desc: 'Show whitelist help menu' },
+    { name: 'antinuke wl', desc: 'Alias for whitelist command' },
+    { name: 'antinuke whitelist user @user', desc: 'Whitelist user for all events' },
+    { name: 'antinuke whitelist role @role', desc: 'Whitelist entire role' },
+    { name: 'antinuke whitelist remove @user', desc: 'Remove user from whitelist' },
+    { name: 'antinuke whitelist remove @role', desc: 'Remove role from whitelist' },
+    { name: 'antinuke whitelist show', desc: 'Display all whitelisted users/roles' },
+    { name: 'antinuke whitelist list', desc: 'Alias for whitelist show' },
+    
+    // Whitelist - Event Specific
+    { name: 'antinuke wl user @user ban', desc: 'Whitelist user for bans only' },
+    { name: 'antinuke wl user @user kick', desc: 'Whitelist user for kicks only' },
+    { name: 'antinuke wl user @user channel_delete', desc: 'Whitelist for channel deletions' },
+    { name: 'antinuke wl user @user channel_create', desc: 'Whitelist for channel creation' },
+    { name: 'antinuke wl user @user role_delete', desc: 'Whitelist for role deletions' },
+    { name: 'antinuke wl user @user role_create', desc: 'Whitelist for role creation' },
+    { name: 'antinuke wl user @user role_update', desc: 'Whitelist for role permission updates' },
+    { name: 'antinuke wl user @user member_role_update', desc: 'Whitelist for member role changes' },
+    { name: 'antinuke wl user @user webhook_create', desc: 'Whitelist for webhook creation' },
+    { name: 'antinuke wl user @user emoji_delete', desc: 'Whitelist for emoji deletions' },
+    { name: 'antinuke wl user @user bot_add', desc: 'Whitelist for bot additions' },
+    
+    // Action Limits
+    { name: 'antinuke limit ban <number>', desc: 'Set ban action limit (default: 1)' },
+    { name: 'antinuke limit kick <number>', desc: 'Set kick action limit (default: 1)' },
+    { name: 'antinuke limit channel_delete <number>', desc: 'Set channel deletion limit (default: 1)' },
+    { name: 'antinuke limit channel_create <number>', desc: 'Set channel creation limit (default: 2)' },
+    { name: 'antinuke limit role_delete <number>', desc: 'Set role deletion limit (default: 1)' },
+    { name: 'antinuke limit role_create <number>', desc: 'Set role creation limit (default: 2)' },
+    { name: 'antinuke limit role_update <number>', desc: 'Set role update limit (default: 2)' },
+    { name: 'antinuke limit member_role_update <number>', desc: 'Set member role change limit (default: 5)' },
+    { name: 'antinuke limit webhook_create <number>', desc: 'Set webhook creation limit (default: 1)' },
+    { name: 'antinuke limit emoji_delete <number>', desc: 'Set emoji deletion limit (default: 2)' },
+    { name: 'antinuke limit bot_add <number>', desc: 'Set bot addition limit (default: 1)' },
+    { name: 'antinuke limit prune <number>', desc: 'Set member prune limit (default: 1)' },
+    
+    // Advanced Features
+    { name: 'antinuke antiperms True', desc: 'Enable automatic permission scanner' },
+    { name: 'antinuke antiperms False', desc: 'Disable automatic permission scanner' },
+    { name: 'antinuke restore channels True', desc: 'Enable auto-restore for deleted channels' },
+    { name: 'antinuke restore channels False', desc: 'Disable auto-restore for channels' },
+    { name: 'antinuke restore roles True', desc: 'Enable auto-restore for deleted roles' },
+    { name: 'antinuke restore roles False', desc: 'Disable auto-restore for roles' },
+    { name: 'antinuke restore bans True', desc: 'Enable auto-unban for mass bans' },
+    { name: 'antinuke restore bans False', desc: 'Disable auto-unban' },
+    { name: 'antinuke restore webhooks True', desc: 'Enable auto-delete for spam webhooks' },
+    { name: 'antinuke restore webhooks False', desc: 'Disable webhook auto-delete' },
+    
+    // Emergency Controls
+    { name: 'antinuke lockdown', desc: 'Emergency server lockdown - freeze all permissions' },
+    { name: 'antinuke unlock', desc: 'Remove lockdown and restore permissions' },
+    
+    // Manual Quarantine
+    { name: 'quarantine @user [reason]', desc: 'Manually quarantine a user' },
+    { name: 'q @user [reason]', desc: 'Short alias for quarantine' },
+    { name: 'unquarantine @user', desc: 'Remove quarantine from user' },
+    { name: 'uq @user', desc: 'Short alias for unquarantine' },
+    
+    // Quarantine Role
+    { name: 'qrole @role', desc: 'Set custom quarantine role' },
+    
+    // Configuration Management
+    { name: 'antinuke reset', desc: 'Reset all anti-nuke configurations' }
+]
             antiraid: [
                 { name: 'antiraid [enable | disable | status]', desc: 'Control anti-raid system' },
                 { name: 'antiraid stats', desc: 'View anti-raid statistics' },
@@ -987,3 +1056,4 @@
 </body>
 
 </html>
+
